@@ -1,0 +1,74 @@
+import { NextResponse } from "next/server";
+import { db } from "@/lib/db";
+import { tasks } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
+
+export async function GET(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const task = await db.query.tasks.findFirst({
+      where: eq(tasks.id, params.id),
+    });
+
+    return NextResponse.json(task, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const body = await req.json();
+    const { title, description, dueDate, priority, projectId, status } = body;
+
+    if (!title || !priority) {
+      return NextResponse.json(
+        { error: "Title and priority are required" },
+        { status: 400 }
+      );
+    }
+
+    await db
+      .update(tasks)
+      .set({
+        title,
+        description,
+        dueDate: dueDate ? new Date(dueDate) : null,
+        priority,
+        projectId: projectId || null,
+        status,
+      })
+      .where(eq(tasks.id, params.id));
+  } catch (error) {
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    await db.delete(tasks).where(eq(tasks.id, params.id));
+    return NextResponse.json(
+      { message: "Task deleted successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 }
+    );
+  }
+}
