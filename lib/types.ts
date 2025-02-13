@@ -6,25 +6,21 @@ export type User = {
   createdAt: Date;
 };
 
-export type Project = {
+export interface Project {
   id: string;
   name: string;
-  description: string;
-  userId: string;
-  createdAt: Date;
-};
+  description?: string;
+}
 
-export type Task = {
+export interface Task {
   id: string;
   title: string;
   description: string;
-  dueDate: Date;
-  priority: string;
-  status: string;
-  projectId: string;
-  userId: string;
-  createdAt: Date;
-};
+  dueDate: string;
+  priority: "low" | "medium" | "high";
+  status: "pending" | "completed";
+  projectId?: string;
+}
 
 export type Category = {
   id: string;

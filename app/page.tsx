@@ -11,7 +11,6 @@ import {
   Bell,
   AlignRight,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -28,11 +27,6 @@ export default function Home() {
     <div className={`min-h-screen ${isDarkMode ? "dark" : ""}`}>
       <div className="fixed inset-0 bg-gradient-to-br from-green-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 -z-10" />
 
-      <div className="fixed inset-0 overflow-hidden -z-5">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-green-200 dark:bg-green-900/20 rounded-full blur-3xl opacity-20" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-200 dark:bg-blue-900/20 rounded-full blur-3xl opacity-20" />
-      </div>
-
       {/* Header */}
       <header className="fixed w-full top-0 z-50">
         <nav className="container mx-auto px-6 py-6">
@@ -40,17 +34,14 @@ export default function Home() {
             <h1 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
               TaskFlow
             </h1>
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex text-xl font-bold items-center gap-8">
               <a
                 href="#features"
-                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                className="text-gray-600  dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
               >
                 Features
               </a>
-              <a
-                href="#pricing"
-                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-              >
+              <a className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white cursor-pointer">
                 Pricing
               </a>
               <button onClick={toggleDarkMode} className="p-2">
@@ -61,10 +52,16 @@ export default function Home() {
                 )}
               </button>
               <a
+                href="/login"
+                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white cursor-pointer"
+              >
+                Login
+              </a>
+              <a
                 href="/signup"
                 className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-medium hover:scale-105 transition-transform"
               >
-                Get Started
+                SignUp
               </a>
             </div>
 
@@ -92,21 +89,27 @@ export default function Home() {
               <nav className="flex flex-col space-y-4 px-4">
                 <a
                   href="#features"
-                  className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2"
+                  className="text-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2"
                 >
                   Features
                 </a>
                 <a
                   href="#pricing"
-                  className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2"
+                  className="text-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2"
                 >
                   Pricing
+                </a>
+                <a
+                  href="/login"
+                  className="text-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white py-2"
+                >
+                  Login
                 </a>
                 <a
                   href="/signup"
                   className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-medium text-center"
                 >
-                  Get Started
+                  SignUp
                 </a>
               </nav>
             </div>
@@ -120,13 +123,6 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center gap-12">
             {/* Left Side */}
             <div className="flex-1 space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 dark:bg-green-900/30 rounded-full">
-                <Sparkles className="h-4 w-4 text-green-600 dark:text-green-400" />
-                <span className="text-sm text-green-600 dark:text-green-400 font-medium">
-                  New Features Available
-                </span>
-              </div>
-
               <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                 Work smarter, not harder with
                 <span className="block text-green-600 dark:text-green-400">
@@ -139,17 +135,13 @@ export default function Home() {
                 platform. Built for teams who want to achieve more.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex items-center justify-center md:justify-start w-full gap-4">
                 <a
                   href="/signup"
-                  className="px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-medium text-center hover:scale-105 transition-transform"
+                  className="px-8  py-4 text-xl font-bold bg-black dark:bg-white text-white dark:text-black rounded-full font-medium text-center hover:scale-105 transition-transform"
                 >
-                  Start for free
+                  Get Started
                 </a>
-                <button className="group px-8 py-4 border border-gray-200 dark:border-gray-700 rounded-full inline-flex items-center justify-center gap-2 hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
-                  Watch demo
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </button>
               </div>
             </div>
 
@@ -166,7 +158,7 @@ export default function Home() {
         </section>
 
         {/* Stats Section */}
-        <section className="container mx-auto px-6 py-24">
+        <section className="container mx-auto mt-10 px-6 py-24">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <StatCard number="10k+" label="Active Users" />
             <StatCard number="1M+" label="Tasks Completed" />

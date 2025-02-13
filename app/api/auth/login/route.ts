@@ -52,6 +52,7 @@ export async function POST(request: Request) {
       {
         message: "User logged in successfully",
         token,
+        userId: user.id,
       },
       {
         status: 200,

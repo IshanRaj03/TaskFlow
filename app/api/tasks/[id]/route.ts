@@ -8,8 +8,9 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    const { id } = await params;
     const task = await db.query.tasks.findFirst({
-      where: eq(tasks.id, params.id),
+      where: eq(tasks.id, id),
     });
 
     return NextResponse.json(task, { status: 200 });
@@ -26,6 +27,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
+    const { id } = await params;
     const body = await req.json();
     const { title, description, dueDate, priority, projectId, status } = body;
 
@@ -46,7 +48,12 @@ export async function PUT(
         projectId: projectId || null,
         status,
       })
-      .where(eq(tasks.id, params.id));
+      .where(eq(tasks.id, id));
+
+    return NextResponse.json(
+      { message: "Task updated successfully", taskId: id },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { error: (error as Error).message },
@@ -60,7 +67,8 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    await db.delete(tasks).where(eq(tasks.id, params.id));
+    const { id } = await params;
+    await db.delete(tasks).where(eq(tasks.id, id));
     return NextResponse.json(
       { message: "Task deleted successfully" },
       { status: 200 }
