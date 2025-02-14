@@ -1,4 +1,3 @@
-// components/TaskList.tsx
 "use client";
 import { useState } from "react";
 import {
@@ -13,13 +12,13 @@ import TaskForm from "./TaskForm";
 
 export default function TaskList() {
   const [filters, setFilters] = useState({
-    priority: "", // Default to empty string
-    status: "", // Default to empty string
+    priority: "",
+    status: "",
     startDate: "",
     endDate: "",
   });
 
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null); // Track selected task for editing
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
   const queryClient = useQueryClient();
 
@@ -43,11 +42,11 @@ export default function TaskList() {
   });
 
   const handleEdit = (task: Task) => {
-    setSelectedTask(task); // Open TaskForm with the selected task
+    setSelectedTask(task);
   };
 
   const handleCloseForm = () => {
-    setSelectedTask(null); // Close TaskForm
+    setSelectedTask(null);
   };
 
   if (isLoading)
@@ -56,7 +55,6 @@ export default function TaskList() {
 
   return (
     <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6">
-      {/* Show TaskForm if a task is selected for editing */}
       {selectedTask && (
         <div className="mb-6">
           <TaskForm
@@ -72,7 +70,6 @@ export default function TaskList() {
         </div>
       )}
 
-      {/* Filters */}
       <div className="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -92,7 +89,6 @@ export default function TaskList() {
           </select>
         </div>
 
-        {/* Status Filter */}
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Status
@@ -109,7 +105,6 @@ export default function TaskList() {
           </select>
         </div>
 
-        {/* Start Date Filter */}
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Start Date
@@ -124,7 +119,6 @@ export default function TaskList() {
           />
         </div>
 
-        {/* End Date Filter */}
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             End Date
@@ -140,7 +134,6 @@ export default function TaskList() {
         </div>
       </div>
 
-      {/* Task Table */}
       <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
         <table className="w-full">
           <thead className="bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm">

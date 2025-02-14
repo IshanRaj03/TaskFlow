@@ -9,11 +9,9 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const task = await db.query.tasks.findFirst({
-      where: eq(tasks.id, id),
-    });
+    const projectTasks = await db.select().from(tasks).where(eq(tasks.id, id));
 
-    return NextResponse.json(task, { status: 200 });
+    return NextResponse.json(projectTasks, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: (error as Error).message },

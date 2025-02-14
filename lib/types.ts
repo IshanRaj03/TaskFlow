@@ -10,6 +10,7 @@ export interface Project {
   id: string;
   name: string;
   description?: string;
+  tasks?: Task[];
 }
 
 export interface Task {
@@ -18,7 +19,7 @@ export interface Task {
   description: string;
   dueDate: string;
   priority: "low" | "medium" | "high";
-  status: "pending" | "completed";
+  status: "pending" | "in-progress" | "completed";
   projectId?: string;
 }
 

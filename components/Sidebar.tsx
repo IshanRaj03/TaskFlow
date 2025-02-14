@@ -41,13 +41,10 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
               <FolderKanban className="h-5 w-5" />
               Projects
             </Link>
-            <Link
-              href="/dashboard/settings"
-              className="flex items-center gap-3 py-3 px-4 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-green-100 dark:hover:bg-green-900/30 hover:text-green-600 dark:hover:text-green-400 transition-colors"
-            >
+            <div className="cursor-pointer flex items-center gap-3 py-3 px-4 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-green-100 dark:hover:bg-green-900/30 hover:text-green-600 dark:hover:text-green-400 transition-colors">
               <Settings className="h-5 w-5" />
               Settings
-            </Link>
+            </div>
           </nav>
         </div>
       </aside>

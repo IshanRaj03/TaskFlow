@@ -4,6 +4,7 @@ import { createTask, updateTask } from "@/lib/api";
 import { Task } from "@/lib/types";
 
 interface TaskFormProps {
+  projectId?: string;
   task?: Task;
   onSubmit: () => void;
 }

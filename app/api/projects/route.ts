@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { projects } from "@/lib/db/schema";
+import { projects, tasks } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
@@ -40,25 +40,25 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
-    const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId");
+    const projectList = await db.select().from(projects);
 
-    if (!userId) {
-      return NextResponse.json(
-        { error: "userId is required" },
-        { status: 400 }
-      );
-    }
-    const userProjects = await db.query.projects.findMany({
-      where: (project) => eq(project.userId, userId),
-    });
+    const projectsWithTasks = await Promise.all(
+      projectList.map(async (project) => {
+        const projectTasks = await db
+          .select()
+          .from(tasks)
+          .where(eq(tasks.projectId, project.id));
+        return { ...project, tasks: projectTasks };
+      })
+    );
 
-    return NextResponse.json(userProjects, { status: 200 });
+    return NextResponse.json(projectsWithTasks, { status: 200 });
   } catch (error) {
+    console.error("Error fetching projects:", error);
     return NextResponse.json(
-      { error: (error as Error).message },
+      { error: "Failed to fetch projects" },
       { status: 500 }
     );
   }

@@ -15,7 +15,7 @@ export const projects = pgTable("projects", {
   id: uuid("id")
     .primaryKey()
     .default(sql`gen_random_uuid()`),
-  name: varchar("name", { length: 255 }),
+  name: varchar("name", { length: 255 }).notNull(),
   description: text("description"),
   userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at").defaultNow(),
