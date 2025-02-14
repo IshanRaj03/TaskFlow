@@ -35,14 +35,6 @@ export default function RootLayout({
             <LayoutClient />
 
             <main>{children}</main>
-
-            <footer className="border-t border-gray-200 dark:border-gray-800">
-              <div className="container mx-auto px-6 py-12">
-                <div className="text-center text-gray-600 dark:text-gray-400">
-                  <p>&copy; 2025 TaskFlow. All rights reserved.</p>
-                </div>
-              </div>
-            </footer>
           </div>
         </Providers>
       </body>
