@@ -9,14 +9,14 @@ interface TaskFormProps {
   onSubmit: () => void;
 }
 
-export default function TaskForm({ task, onSubmit }: TaskFormProps) {
+export default function TaskForm({ task, projectId, onSubmit }: TaskFormProps) {
   const [formData, setFormData] = useState<Omit<Task, "id">>({
     title: task?.title || "",
     description: task?.description || "",
     dueDate: task?.dueDate || "",
     priority: task?.priority || "low",
     status: task?.status || "pending",
-    projectId: task?.projectId || "",
+    projectId: task?.projectId || projectId || "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
