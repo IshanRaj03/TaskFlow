@@ -29,6 +29,20 @@ export const fetchTasks = async (params: {
   return response.data;
 };
 
+export const fetchAllTasks = async (): Promise<Task[]> => {
+  const { token, userId } = useAuthStore.getState();
+  if (!userId) throw new Error("User ID not found. Please login again.");
+
+  const response = await axios.get<Task[]>("/api/tasks/all", {
+    params: { userId },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};
+
 export const fetchProject = async (): Promise<Project[]> => {
   const { userId, token } = useAuthStore.getState();
   if (!userId) throw new Error("User ID not found. Please login again.");

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { X, CheckCircle, FolderKanban, Settings } from "lucide-react";
+import { X, CheckCircle, FolderKanban, Settings, Gauge } from "lucide-react";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -27,6 +27,13 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
             TaskFlow
           </h2>
           <nav className="space-y-4">
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-3 py-3 px-4 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-green-100 dark:hover:bg-green-900/30 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+            >
+              <Gauge className="h-5 w-5" />
+              Dashboard
+            </Link>
             <Link
               href="/dashboard/tasks"
               className="flex items-center gap-3 py-3 px-4 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-green-100 dark:hover:bg-green-900/30 hover:text-green-600 dark:hover:text-green-400 transition-colors"
