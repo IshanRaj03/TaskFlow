@@ -17,7 +17,7 @@ export async function GET(req: Request) {
     const standaloneTasks = await db.query.tasks.findMany({
       where: (task) => eq(task.userId, userId),
     });
-    let allTasks = [...standaloneTasks];
+    const allTasks = [...standaloneTasks];
 
     const projectData = await db.query.projects.findMany({
       where: (project) => eq(project.userId, userId),

@@ -29,15 +29,7 @@ export default function Login() {
       return response.json();
     },
     onSuccess: ({ token, userId }) => {
-      const { token: to, userId: ids } = useAuthStore.getState();
-      console.log(ids);
-      console.log(to);
-
       login(token, userId);
-      const { token: t, userId: id } = useAuthStore.getState();
-      console.log(id);
-      console.log(t);
-
       router.push("/dashboard");
     },
     onError: (err: Error) => {
@@ -53,7 +45,6 @@ export default function Login() {
   return (
     <div className="pt-32 min-h-screen flex flex-col">
       <div className="fixed inset-0 bg-gradient-to-br from-green-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 -z-10" />
-
       <main className="flex-1 flex items-start justify-center px-6 pt-8">
         <div className="w-full max-w-md p-8 space-y-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl shadow-lg">
           <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white">
@@ -62,7 +53,6 @@ export default function Login() {
           <p className="text-center text-gray-600 dark:text-gray-300">
             Log in to your TaskFlow account
           </p>
-
           {error && (
             <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
               <p className="text-red-600 dark:text-red-400 text-center">
@@ -70,7 +60,6 @@ export default function Login() {
               </p>
             </div>
           )}
-
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -113,7 +102,6 @@ export default function Login() {
                 </button>
               </div>
             </div>
-
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -135,7 +123,6 @@ export default function Login() {
                 Forgot password?
               </a>
             </div>
-
             <button
               type="submit"
               disabled={isPending}
@@ -144,9 +131,8 @@ export default function Login() {
               {isPending ? "Logging in..." : "Log In"}
             </button>
           </form>
-
           <p className="text-center text-gray-600 dark:text-gray-300">
-            Don't have an account?{" "}
+            Don&#39;t have an account?{" "}
             <a
               href="/signup"
               className="text-green-600 dark:text-green-400 hover:underline"

@@ -2,10 +2,11 @@
 import TaskList from "@/components/TaskList";
 import TaskForm from "@/components/TaskForm";
 import { useState } from "react";
+import { Task } from "@/lib/types";
 
 export default function TasksPage() {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [viewTask, setViewTask] = useState<any | null>(null);
+  const [viewTask, setViewTask] = useState<Task | null>(null);
 
   return (
     <div className="container mx-auto px-6 py-12">

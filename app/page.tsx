@@ -10,7 +10,6 @@ import {
   FolderKanban,
   Bell,
   AlignRight,
-  ArrowRight,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -27,7 +26,6 @@ export default function Home() {
     <div className={`min-h-screen ${isDarkMode ? "dark" : ""}`}>
       <div className="fixed inset-0 bg-gradient-to-br from-green-100 to-blue-200 dark:from-gray-900 dark:to-gray-800 -z-10" />
 
-      {/* Header */}
       <header className="fixed w-full top-0 z-50">
         <nav className="container mx-auto px-6 py-6">
           <div className="flex justify-between items-center">
@@ -65,7 +63,6 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center gap-4">
               <button onClick={toggleDarkMode} className="p-2">
                 {isDarkMode ? (
@@ -83,7 +80,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Mobile Menu */}
           {isMobileMenuOpen && (
             <div className="md:hidden mt-4 py-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl">
               <nav className="flex flex-col space-y-4 px-4">
@@ -118,10 +114,8 @@ export default function Home() {
       </header>
 
       <main className="pt-32">
-        {/* Hero Section */}
         <section className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center gap-12">
-            {/* Left Side */}
             <div className="flex-1 space-y-8">
               <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                 Work smarter, not harder with
@@ -145,7 +139,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Side - Feature Cards */}
             <div className="flex-1">
               <div className="grid grid-cols-2 gap-4">
                 <FeatureCard icon={<CheckCircle />} title="Task Management" />
@@ -157,7 +150,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Stats Section */}
         <section className="container mx-auto mt-10 px-6 py-24">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <StatCard number="10k+" label="Active Users" />
@@ -167,7 +159,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section */}
         <section id="features" className="container mx-auto px-6 py-24">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
@@ -237,7 +228,6 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
       <footer className="border-t border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-6 py-12">
           <div className="text-center text-gray-600 dark:text-gray-400">
