@@ -5,11 +5,12 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const project = await db.query.projects.findFirst({
-      where: (project) => eq(project.id, params.id),
+      where: (project) => eq(project.id, id),
     });
 
     if (!project) {
@@ -27,12 +28,12 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await req.json();
     const { name, description } = body;
-    const projectId = params.id;
+    const { id: projectId } = await params;
 
     if (!name) {
       return NextResponse.json({ error: "Name is required" }, { status: 400 });
@@ -60,10 +61,10 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const projectId = params.id;
+    const { id: projectId } = await params;
 
     await db.delete(projects).where(eq(projects.id, projectId));
 

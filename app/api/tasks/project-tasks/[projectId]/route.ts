@@ -5,13 +5,14 @@ import { tasks } from "@/lib/db/schema";
 
 export async function GET(
   req: Request,
-  { params }: { params: { projectId: string } }
+  { params }: { params: Promise<{ projectId: string }> }
 ) {
   try {
+    const { projectId: id } = await params;
     const projectTasks = await db
       .select()
       .from(tasks)
-      .where(eq(tasks.projectId, params.projectId));
+      .where(eq(tasks.projectId, id));
     return NextResponse.json(projectTasks, { status: 200 });
   } catch (error) {
     console.error("Error fetching tasks:", error);

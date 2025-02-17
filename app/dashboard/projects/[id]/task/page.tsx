@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { use, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { fetchTasks, deleteTask } from "@/lib/api";
@@ -8,27 +8,29 @@ import TaskForm from "@/components/TaskForm";
 export default function ProjectTasksPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const [isFormOpen, setIsFormOpen] = useState(false);
 
+  const { id } = use(params);
+
   const {
     data: tasks,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["tasks", params.id],
-    queryFn: () => fetchTasks({ projectId: params.id }),
+    queryKey: ["tasks", id],
+    queryFn: () => fetchTasks({ projectId: id }),
   });
 
   const { mutate: deleteTaskMutation } = useMutation({
     mutationFn: deleteTask,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["tasks", params.id],
+        queryKey: ["tasks", id],
       });
     },
   });
@@ -69,10 +71,10 @@ export default function ProjectTasksPage({
             onSubmit={() => {
               setIsFormOpen(false);
               queryClient.invalidateQueries({
-                queryKey: ["tasks", params.id],
+                queryKey: ["tasks", id],
               });
             }}
-            projectId={params.id}
+            projectId={id}
           />
         </div>
       )}
