@@ -8,9 +8,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const projectId = params.id;
     const project = await db.query.projects.findFirst({
-      where: (project) => eq(project.id, projectId),
+      where: (project) => eq(project.id, params.id),
     });
 
     if (!project) {
