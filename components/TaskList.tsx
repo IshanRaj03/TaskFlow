@@ -1,12 +1,7 @@
 "use client";
 import { useState } from "react";
-import {
-  useQuery,
-  useMutation,
-  QueryClient,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { fetchTasks, createTask, updateTask, deleteTask } from "@/lib/api";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { fetchTasks, updateTask, deleteTask } from "@/lib/api";
 import { Task } from "@/lib/types";
 import TaskForm from "./TaskForm";
 

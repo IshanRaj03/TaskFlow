@@ -2,9 +2,10 @@
 import { useState } from "react";
 import ProjectList from "@/components/ProjectList";
 import ProjectForm from "@/components/ProjectForm";
+import { Task } from "@/lib/types";
 
 export default function ProjectsPage() {
-  const [viewTask, setViewTask] = useState<any | null>(null);
+  const [viewTask, setViewTask] = useState<Task | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   return (

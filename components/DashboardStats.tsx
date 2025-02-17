@@ -4,20 +4,12 @@ import { fetchAllTasks } from "@/lib/api";
 import { useState } from "react";
 
 export default function DashboardStats() {
-  const [filters, setFilters] = useState({
-    projectId: "",
-    priority: "",
-    status: "",
-    startDate: "",
-    endDate: "",
-  });
-
   const {
     data: tasks,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["tasks", filters],
+    queryKey: ["tasks"],
     queryFn: () => fetchAllTasks(),
   });
 
@@ -27,8 +19,6 @@ export default function DashboardStats() {
   const totalTasks = tasks?.length || 0;
   const pendingTasks =
     tasks?.filter((task) => task.status === "pending").length || 0;
-  const inProgressTasks =
-    tasks?.filter((task) => task.status === "in-progress").length || 0;
   const completedTasks =
     tasks?.filter((task) => task.status === "completed").length || 0;
 
