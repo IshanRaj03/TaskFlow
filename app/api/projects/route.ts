@@ -40,9 +40,22 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    const projectList = await db.select().from(projects);
+    const { searchParams } = new URL(req.url);
+    const userId = searchParams.get("userId");
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: "User ID is required" },
+        { status: 400 }
+      );
+    }
+
+    const projectList = await db
+      .select()
+      .from(projects)
+      .where(eq(projects.userId, userId));
 
     const projectsWithTasks = await Promise.all(
       projectList.map(async (project) => {
